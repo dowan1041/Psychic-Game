@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Psychic Game</title>
+</head>
+  <body>
+    <div id="game">
+      <h1> The Psychic Game </h1>
+      <p>Guess what letter I’m thinking of</p>
+      <p>Wins: <span id="user-wins">0</span></p>
+      <p>Losses: <span id="user-losses">0</span></p>
+      <p>Guess Left: <span id="guess-left">9</span></p>
+      <p>Your Guesses so far:<span id="guessed-letters"></span></p>
+    </div>
+
+    <script type="text/javascript">
+
+      // Variables
+      var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+      var userWins = 0;
+      var userLosses = 0;
+      var guessLeft = 9;
+      var letterGuesses =[];
+      // Function
+      document.onkeyup = function(event) {
+
+        var userGuess = event.key;
+        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+        letterGuesses.push(userGuess)
+        
+
+        if ( userGuess === computerGuess) {
+          userWins++;
+        } else {
+          guessLeft--;
+        }
+        if (guessLeft === 0) {
+          userLosses ++;
+          guessLeft = 9;
+        }
+        
+        
+        var userWinsElement = document.getElementById('user-wins');
+        var userLossesElement = document.getElementById('user-losses');
+        var guessLeftElement = document.getElementById('guess-left');
+        var letterGuessesElement = document.getElementById('guessed-letters');
+
+        userWinsElement.innerHTML = userWins;
+        userLossesElement.innerHTML = userLosses;
+        guessLeftElement.innerHTML = guessLeft;
+        letterGuessesElement.innerHTML = letterGuesses;
+        if (letterGuesses.length === 9) {
+          letterGuesses = [];
+        }
+      };
+    </script>
+  </body>
+</html>
